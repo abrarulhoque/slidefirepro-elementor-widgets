@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SlideFire Category Widget
  * Description: Custom Elementor widget for SlideFire category navigation with mobile swipe functionality
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Abrar
  * Text Domain: slidefire-category-widget
  * Elementor tested up to: 3.25.0
