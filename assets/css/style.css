@@ -1133,4 +1133,414 @@
     }
 }
 
+/* Jersey Selector Widget Styles */
+.slidefire-jersey-selector {
+    background-color: rgba(26, 26, 26, 0.2);
+    padding: 80px 0;
+}
+
+.slidefire-jersey-selector .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Section Headers */
+.jersey-selector-main-title {
+    color: var(--foreground);
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    font-weight: var(--slidefire-font-weight-bold);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.jersey-selector-highlight {
+    background: linear-gradient(to right, var(--primary), #4F9BFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Grid Layouts */
+.grid {
+    display: grid;
+    gap: 2rem;
+}
+
+.grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* Product Cards */
+.jersey-card,
+.pants-card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    width: 100%;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.jersey-card:hover,
+.pants-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Most Popular Badge */
+.jersey-card.border-primary,
+.pants-card.border-primary {
+    border-color: var(--primary);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transform: scale(1.05);
+}
+
+.jersey-card .absolute,
+.pants-card .absolute {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: var(--slidefire-font-weight-medium);
+}
+
+/* Product Images */
+.jersey-card img,
+.pants-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Feature Lists */
+.space-y-4 > * + * {
+    margin-top: 1rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.space-x-3 > * + * {
+    margin-left: 0.75rem;
+}
+
+.flex-shrink-0 {
+    flex-shrink: 0;
+}
+
+/* Feature Icons */
+.jersey-card svg,
+.pants-card svg {
+    width: 20px;
+    height: 20px;
+}
+
+.text-primary {
+    color: var(--primary);
+}
+
+.text-muted-foreground {
+    color: var(--muted-foreground);
+}
+
+.text-foreground {
+    color: var(--foreground);
+}
+
+/* Feature Values */
+.bg-primary\/10 {
+    background-color: rgba(35, 178, 238, 0.1);
+}
+
+/* Typography */
+.text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+.font-bold {
+    font-weight: var(--slidefire-font-weight-bold);
+}
+
+.font-medium {
+    font-weight: var(--slidefire-font-weight-medium);
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+/* Spacing */
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem;
+}
+
+.mb-8 {
+    margin-bottom: 2rem;
+}
+
+.mb-16 {
+    margin-bottom: 4rem;
+}
+
+.mb-20 {
+    margin-bottom: 5rem;
+}
+
+.mt-8 {
+    margin-top: 2rem;
+}
+
+.pt-6 {
+    padding-top: 1.5rem;
+}
+
+.px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.py-20 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+/* Borders */
+.border-t {
+    border-top: 1px solid var(--border);
+}
+
+.border-border {
+    border-color: var(--border);
+}
+
+.rounded {
+    border-radius: 0.25rem;
+}
+
+.rounded-md {
+    border-radius: 0.375rem;
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.rounded-xl {
+    border-radius: 0.75rem;
+}
+
+/* CTA Button */
+.inline-flex {
+    display: inline-flex;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.gap-8 {
+    gap: 2rem;
+}
+
+.whitespace-nowrap {
+    white-space: nowrap;
+}
+
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.h-10 {
+    height: 2.5rem;
+}
+
+.bg-primary {
+    background-color: var(--primary);
+}
+
+.bg-primary:hover {
+    background-color: rgba(35, 178, 238, 0.9);
+}
+
+.text-primary-foreground {
+    color: var(--primary-foreground);
+}
+
+/* Text Alignment */
+.text-center {
+    text-align: center;
+}
+
+/* Max Width */
+.max-w-2xl {
+    max-width: 42rem;
+}
+
+.max-w-4xl {
+    max-width: 56rem;
+}
+
+.max-w-6xl {
+    max-width: 72rem;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive Image Containers */
+.w-32 {
+    width: 8rem;
+}
+
+.h-40 {
+    height: 10rem;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.object-cover {
+    object-fit: cover;
+}
+
+/* Overflow */
+.overflow-hidden {
+    overflow: hidden;
+}
+
+/* Flex Wrap */
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+/* Background Utilities */
+.bg-secondary\/20 {
+    background-color: rgba(26, 26, 26, 0.2);
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .md\:text-5xl {
+        font-size: 3rem;
+        line-height: 1;
+    }
+}
+
+/* Jersey Selector Specific Overrides */
+.slidefire-jersey-selector .jersey-card.scale-105 {
+    transform: scale(1.05);
+}
+
+.slidefire-jersey-selector .pants-card.scale-105 {
+    transform: scale(1.05);
+}
+
+.slidefire-jersey-selector .border-chart-3 {
+    border-color: #8b5cf6;
+}
+
+.slidefire-jersey-selector .bg-gradient-to-r {
+    background-image: linear-gradient(to right, var(--primary), #4F9BFF);
+}
+
+.slidefire-jersey-selector .bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.slidefire-jersey-selector .text-transparent {
+    color: transparent;
+}
+
+/* End Jersey Selector Widget Styles */
+
 

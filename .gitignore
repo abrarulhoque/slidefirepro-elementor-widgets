@@ -2,8 +2,20 @@
 resources/
 
 # Ignore documentation and info files
-guide.md
+CLAUDE.md
 plugin-info.txt
 
 # Ignore all zip files
 *.zip
+
+image.png
+image copy.png
+image copy 2.png
+image copy 3.png
+image copy 4.png
+image copy 5.png
+image copy 6.png
+image copy 7.png
+image copy 8.png
+image copy 9.png
+image copy 10.png

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SlideFire Category Widget
  * Description: Custom Elementor widget for SlideFire category navigation with mobile swipe functionality
- * Version: 1.2.0
+ * Version: 1.3.0
  * Author: Abrar
  * Text Domain: slidefire-category-widget
  * Elementor tested up to: 3.25.0
@@ -134,9 +134,11 @@ class SlideFire_Category_Widget_Plugin {
         require_once( SLIDEFIRE_CATEGORY_WIDGET_PATH . 'widgets/class-category-navigation-widget.php' );
         require_once( SLIDEFIRE_CATEGORY_WIDGET_PATH . 'widgets/class-hero-section-widget.php' );
         require_once( SLIDEFIRE_CATEGORY_WIDGET_PATH . 'widgets/class-category-nav-widget.php' );
+        require_once( SLIDEFIRE_CATEGORY_WIDGET_PATH . 'widgets/class-jersey-selector-widget.php' );
         $widgets_manager->register( new \SlideFire_Category_Navigation_Widget() );
         $widgets_manager->register( new \SlideFire_Hero_Section_Widget() );
         $widgets_manager->register( new \SlideFire_Category_Nav_Widget() );
+        $widgets_manager->register( new \SlideFire_Jersey_Selector_Widget() );
     }
 
     /**
@@ -147,7 +149,7 @@ class SlideFire_Category_Widget_Plugin {
             'slidefire-category-widget',
             SLIDEFIRE_CATEGORY_WIDGET_URL . 'assets/css/style.css',
             [],
-            '1.2.0'
+            '1.3.0'
         );
     }
 
@@ -159,7 +161,7 @@ class SlideFire_Category_Widget_Plugin {
             'slidefire-category-widget',
             SLIDEFIRE_CATEGORY_WIDGET_URL . 'assets/js/script.js',
             [ 'jquery' ],
-            '1.2.0',
+            '1.3.0',
             true
         );
     }
