@@ -215,13 +215,49 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
             ]
         );
 
+        $jersey_feature_repeater = new \Elementor\Repeater();
+        $jersey_feature_repeater->add_control(
+            'feature_name',
+            [
+                'label' => esc_html__( 'Feature Name', 'slidefire-category-widget' ),
+                'type'  => \Elementor\Controls_Manager::TEXT,
+                'default' => 'Chest Padding',
+            ]
+        );
+        $jersey_feature_repeater->add_control(
+            'badge_text',
+            [
+                'label' => esc_html__( 'Badge Text', 'slidefire-category-widget' ),
+                'type'  => \Elementor\Controls_Manager::TEXT,
+                'default' => 'LIGHT FOAM',
+            ]
+        );
+        $jersey_feature_repeater->add_control(
+            'icon_type',
+            [
+                'label' => esc_html__( 'Icon Type', 'slidefire-category-widget' ),
+                'type'  => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'check' => esc_html__( 'Check', 'slidefire-category-widget' ),
+                    'x'     => esc_html__( 'Cross', 'slidefire-category-widget' ),
+                ],
+                'default' => 'check',
+            ]
+        );
+
+        // Replace textarea jersey_features control with repeater
         $jersey_repeater->add_control(
             'jersey_features',
             [
-                'label' => esc_html__( 'Jersey Features (Format: Feature Name | Badge Text | Icon Type)', 'slidefire-category-widget' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => 'Chest Padding | LIGHT FOAM | check\nShoulder Padding | LIGHT FOAM | check\nSoftshell Forearms | YES | check\nAnti-Slide Thumbs | YES | check\nBreathability | VERY HIGH | check\nDurability | DURABLE | check\nAgility | MAXIMUM | check\nMain Materials | PRO LIGHT MESH | check',
-                'description' => 'One feature per line. Icon types: "check" or "x"',
+                'label' => esc_html__( 'Jersey Features', 'slidefire-category-widget' ),
+                'type'  => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $jersey_feature_repeater->get_controls(),
+                'default' => [
+                    [ 'feature_name' => 'Chest Padding', 'badge_text' => 'LIGHT FOAM', 'icon_type' => 'check' ],
+                    [ 'feature_name' => 'Shoulder Padding', 'badge_text' => 'LIGHT FOAM', 'icon_type' => 'check' ],
+                    [ 'feature_name' => 'Softshell Forearms', 'badge_text' => 'YES', 'icon_type' => 'check' ],
+                ],
+                'title_field' => '{{{ feature_name }}}',
             ]
         );
 
@@ -344,13 +380,47 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
             ]
         );
 
+        $pants_feature_repeater = new \Elementor\Repeater();
+        $pants_feature_repeater->add_control(
+            'feature_name',
+            [
+                'label' => esc_html__( 'Feature Name', 'slidefire-category-widget' ),
+                'type'  => \Elementor\Controls_Manager::TEXT,
+                'default' => 'Crotch Padding',
+            ]
+        );
+        $pants_feature_repeater->add_control(
+            'badge_text',
+            [
+                'label' => esc_html__( 'Badge Text', 'slidefire-category-widget' ),
+                'type'  => \Elementor\Controls_Manager::TEXT,
+                'default' => 'NONE',
+            ]
+        );
+        $pants_feature_repeater->add_control(
+            'icon_type',
+            [
+                'label' => esc_html__( 'Icon Type', 'slidefire-category-widget' ),
+                'type'  => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'check' => esc_html__( 'Check', 'slidefire-category-widget' ),
+                    'x'     => esc_html__( 'Cross', 'slidefire-category-widget' ),
+                ],
+                'default' => 'check',
+            ]
+        );
+
         $pants_repeater->add_control(
             'pants_features',
             [
-                'label' => esc_html__( 'Pants Features (Format: Feature Name | Badge Text | Icon Type)', 'slidefire-category-widget' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => 'Crotch Padding | NONE | x\nRear and Thigh Padding | NONE | x\nKnee Padding | NONE | x\nSoftshell Knees | YES | check\nBreathable Side Panels | YES | check',
-                'description' => 'One feature per line. Icon types: "check" or "x"',
+                'label' => esc_html__( 'Pants Features', 'slidefire-category-widget' ),
+                'type'  => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $pants_feature_repeater->get_controls(),
+                'default' => [
+                    [ 'feature_name' => 'Crotch Padding', 'badge_text' => 'NONE', 'icon_type' => 'x' ],
+                    [ 'feature_name' => 'Softshell Knees', 'badge_text' => 'YES', 'icon_type' => 'check' ],
+                ],
+                'title_field' => '{{{ feature_name }}}',
             ]
         );
 
@@ -473,23 +543,32 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                 
                                 <div class="jersey-features">
                                     <?php 
-                                    if ( !empty( $jersey['jersey_features'] ) ) {
-                                        $features = explode( "\n", $jersey['jersey_features'] );
-                                        foreach ( $features as $feature ) {
-                                            $parts = explode( '|', $feature );
-                                            if ( count( $parts ) === 3 ) {
-                                                $name = trim( $parts[0] );
-                                                $badge = trim( $parts[1] );
-                                                $icon_type = trim( $parts[2] );
-                                                
-                                                $text_class = ( $icon_type === 'check' ) ? 'jersey-feature-name' : 'muted-feature-name';
-                                                
-                                                if ( $icon_type === 'check' ) {
-                                                    $svg = '<svg class="jersey-icon check-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>';
-                                                } else {
-                                                    $svg = '<svg class="jersey-icon x-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
+                                    if ( ! empty( $jersey['jersey_features'] ) ) {
+                                        $features_src = $jersey['jersey_features'];
+                                        if ( is_array( $features_src ) ) {
+                                            $features_arr = $features_src;
+                                        } else {
+                                            $tmp = explode( "\n", $features_src );
+                                            $features_arr = [];
+                                            foreach ( $tmp as $feature_line ) {
+                                                $parts = explode( '|', $feature_line );
+                                                if ( count( $parts ) === 3 ) {
+                                                    $features_arr[] = [
+                                                        'feature_name' => trim( $parts[0] ),
+                                                        'badge_text'   => trim( $parts[1] ),
+                                                        'icon_type'    => trim( $parts[2] ),
+                                                    ];
                                                 }
-                                                ?>
+                                            }
+                                        }
+                                        foreach ( $features_arr as $f ) {
+                                            $name = $f['feature_name'];
+                                            $badge = $f['badge_text'];
+                                            $icon_type = $f['icon_type'];
+
+                                            $text_class = ( $icon_type === 'check' ) ? 'jersey-feature-name' : 'muted-feature-name';
+                                            $svg = ( $icon_type === 'check' ) ? '<svg class="jersey-icon check-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>' : '<svg class="jersey-icon x-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
+                                            ?>
                                                 <div class="jersey-feature">
                                                     <div class="jersey-feature-info">
                                                         <?php echo $svg; ?>
@@ -497,8 +576,7 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                                     </div>
                                                     <span class="jersey-feature-badge"><?php echo esc_html( $badge ); ?></span>
                                                 </div>
-                                                <?php
-                                            }
+                                            <?php
                                         }
                                     }
                                     ?>
@@ -565,23 +643,32 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                 
                                 <div class="pants-features">
                                     <?php 
-                                    if ( !empty( $pants['pants_features'] ) ) {
-                                        $features = explode( "\n", $pants['pants_features'] );
-                                        foreach ( $features as $feature ) {
-                                            $parts = explode( '|', $feature );
-                                            if ( count( $parts ) === 3 ) {
-                                                $name = trim( $parts[0] );
-                                                $badge = trim( $parts[1] );
-                                                $icon_type = trim( $parts[2] );
-                                                
-                                                $text_class = ( $icon_type === 'check' ) ? 'pants-feature-name' : 'muted-feature-name';
-                                                
-                                                if ( $icon_type === 'check' ) {
-                                                    $svg = '<svg class="pants-icon check-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>';
-                                                } else {
-                                                    $svg = '<svg class="pants-icon x-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
+                                    if ( ! empty( $pants['pants_features'] ) ) {
+                                        $features_src = $pants['pants_features'];
+                                        if ( is_array( $features_src ) ) {
+                                            $features_arr = $features_src;
+                                        } else {
+                                            $tmp = explode( "\n", $features_src );
+                                            $features_arr = [];
+                                            foreach ( $tmp as $feature_line ) {
+                                                $parts = explode( '|', $feature_line );
+                                                if ( count( $parts ) === 3 ) {
+                                                    $features_arr[] = [
+                                                        'feature_name' => trim( $parts[0] ),
+                                                        'badge_text'   => trim( $parts[1] ),
+                                                        'icon_type'    => trim( $parts[2] ),
+                                                    ];
                                                 }
-                                                ?>
+                                            }
+                                        }
+                                        foreach ( $features_arr as $f ) {
+                                            $name = $f['feature_name'];
+                                            $badge = $f['badge_text'];
+                                            $icon_type = $f['icon_type'];
+
+                                            $text_class = ( $icon_type === 'check' ) ? 'pants-feature-name' : 'muted-feature-name';
+                                            $svg = ( $icon_type === 'check' ) ? '<svg class="pants-icon check-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>' : '<svg class="pants-icon x-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
+                                            ?>
                                                 <div class="pants-feature">
                                                     <div class="pants-feature-info">
                                                         <?php echo $svg; ?>
@@ -589,8 +676,7 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                                     </div>
                                                     <span class="pants-feature-badge"><?php echo esc_html( $badge ); ?></span>
                                                 </div>
-                                                <?php
-                                            }
+                                            <?php
                                         }
                                     }
                                     ?>
@@ -680,7 +766,10 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                 
                                 <div class="jersey-features">
                                     <# if ( jersey.jersey_features ) {
-                                        var features = jersey.jersey_features.split('\\n');
+                                        var features = jersey.jersey_features;
+                                        if ( typeof features === 'string' ) {
+                                            features = features.split('\\n');
+                                        }
                                         _.each( features, function( feature ) {
                                             var parts = feature.split('|');
                                             if ( parts.length === 3 ) {
@@ -749,7 +838,10 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                 
                                 <div class="pants-features">
                                     <# if ( pants.pants_features ) {
-                                        var features = pants.pants_features.split('\\n');
+                                        var features = pants.pants_features;
+                                        if ( typeof features === 'string' ) {
+                                            features = features.split('\\n');
+                                        }
                                         _.each( features, function( feature ) {
                                             var parts = feature.split('|');
                                             if ( parts.length === 3 ) {
@@ -792,7 +884,10 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                     <a href="#" class="cta-button">{{{ settings.cta_button_text }}}</a>
                     <div class="cta-features">
                         <# if ( settings.cta_features ) {
-                            var features = settings.cta_features.split('\\n');
+                            var features = settings.cta_features;
+                            if ( typeof features === 'string' ) {
+                                features = features.split('\\n');
+                            }
                             _.each( features, function( feature ) {
                                 if ( feature.trim() ) { #>
                                     <span>â€¢ {{{ feature.trim() }}}</span>
