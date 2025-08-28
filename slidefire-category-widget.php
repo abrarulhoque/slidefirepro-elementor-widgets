@@ -132,7 +132,9 @@ class SlideFire_Category_Widget_Plugin {
      */
     public function register_widgets( $widgets_manager ) {
         require_once( SLIDEFIRE_CATEGORY_WIDGET_PATH . 'widgets/class-category-navigation-widget.php' );
+        require_once( SLIDEFIRE_CATEGORY_WIDGET_PATH . 'widgets/class-hero-section-widget.php' );
         $widgets_manager->register( new \SlideFire_Category_Navigation_Widget() );
+        $widgets_manager->register( new \SlideFire_Hero_Section_Widget() );
     }
 
     /**
