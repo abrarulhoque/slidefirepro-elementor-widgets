@@ -215,49 +215,13 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        $jersey_feature_repeater = new \Elementor\Repeater();
-        $jersey_feature_repeater->add_control(
-            'feature_name',
-            [
-                'label' => esc_html__( 'Feature Name', 'slidefire-category-widget' ),
-                'type'  => \Elementor\Controls_Manager::TEXT,
-                'default' => 'Chest Padding',
-            ]
-        );
-        $jersey_feature_repeater->add_control(
-            'badge_text',
-            [
-                'label' => esc_html__( 'Badge Text', 'slidefire-category-widget' ),
-                'type'  => \Elementor\Controls_Manager::TEXT,
-                'default' => 'LIGHT FOAM',
-            ]
-        );
-        $jersey_feature_repeater->add_control(
-            'icon_type',
-            [
-                'label' => esc_html__( 'Icon Type', 'slidefire-category-widget' ),
-                'type'  => \Elementor\Controls_Manager::SELECT,
-                'options' => [
-                    'check' => esc_html__( 'Check', 'slidefire-category-widget' ),
-                    'x'     => esc_html__( 'Cross', 'slidefire-category-widget' ),
-                ],
-                'default' => 'check',
-            ]
-        );
-
-        // Replace textarea jersey_features control with repeater
+        // Restore textarea-based jersey_features control instead of nested repeater
         $jersey_repeater->add_control(
             'jersey_features',
             [
-                'label' => esc_html__( 'Jersey Features', 'slidefire-category-widget' ),
-                'type'  => \Elementor\Controls_Manager::REPEATER,
-                'fields' => $jersey_feature_repeater->get_controls(),
-                'default' => [
-                    [ 'feature_name' => 'Chest Padding', 'badge_text' => 'LIGHT FOAM', 'icon_type' => 'check' ],
-                    [ 'feature_name' => 'Shoulder Padding', 'badge_text' => 'LIGHT FOAM', 'icon_type' => 'check' ],
-                    [ 'feature_name' => 'Softshell Forearms', 'badge_text' => 'YES', 'icon_type' => 'check' ],
-                ],
-                'title_field' => '{{{ feature_name }}}',
+                'label' => esc_html__( 'Jersey Features (one per line: Feature Name | Badge Text | Icon Type)', 'slidefire-category-widget' ),
+                'type'  => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => "Chest Padding | LIGHT FOAM | check\nShoulder Padding | LIGHT FOAM | check\nSoftshell Forearms | YES | check\nAnti-Slide Thumbs | YES | check\nBreathability | VERY HIGH | check\nDurability | DURABLE | check\nAgility | MAXIMUM | check\nMain Materials | PRO LIGHT MESH | check",
             ]
         );
 
@@ -380,47 +344,13 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        $pants_feature_repeater = new \Elementor\Repeater();
-        $pants_feature_repeater->add_control(
-            'feature_name',
-            [
-                'label' => esc_html__( 'Feature Name', 'slidefire-category-widget' ),
-                'type'  => \Elementor\Controls_Manager::TEXT,
-                'default' => 'Crotch Padding',
-            ]
-        );
-        $pants_feature_repeater->add_control(
-            'badge_text',
-            [
-                'label' => esc_html__( 'Badge Text', 'slidefire-category-widget' ),
-                'type'  => \Elementor\Controls_Manager::TEXT,
-                'default' => 'NONE',
-            ]
-        );
-        $pants_feature_repeater->add_control(
-            'icon_type',
-            [
-                'label' => esc_html__( 'Icon Type', 'slidefire-category-widget' ),
-                'type'  => \Elementor\Controls_Manager::SELECT,
-                'options' => [
-                    'check' => esc_html__( 'Check', 'slidefire-category-widget' ),
-                    'x'     => esc_html__( 'Cross', 'slidefire-category-widget' ),
-                ],
-                'default' => 'check',
-            ]
-        );
-
+        // Remove nested repeater for pants features and restore textarea control
         $pants_repeater->add_control(
             'pants_features',
             [
-                'label' => esc_html__( 'Pants Features', 'slidefire-category-widget' ),
-                'type'  => \Elementor\Controls_Manager::REPEATER,
-                'fields' => $pants_feature_repeater->get_controls(),
-                'default' => [
-                    [ 'feature_name' => 'Crotch Padding', 'badge_text' => 'NONE', 'icon_type' => 'x' ],
-                    [ 'feature_name' => 'Softshell Knees', 'badge_text' => 'YES', 'icon_type' => 'check' ],
-                ],
-                'title_field' => '{{{ feature_name }}}',
+                'label' => esc_html__( 'Pants Features (one per line: Feature Name | Badge Text | Icon Type)', 'slidefire-category-widget' ),
+                'type'  => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => "Crotch Padding | NONE | x\nRear and Thigh Padding | NONE | x\nKnee Padding | NONE | x\nSoftshell Knees | YES | check\nBreathable Side Panels | YES | check",
             ]
         );
 
@@ -544,21 +474,18 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                 <div class="jersey-features">
                                     <?php 
                                     if ( ! empty( $jersey['jersey_features'] ) ) {
-                                        $features_src = $jersey['jersey_features'];
-                                        if ( is_array( $features_src ) ) {
-                                            $features_arr = $features_src;
-                                        } else {
-                                            $tmp = explode( "\n", $features_src );
-                                            $features_arr = [];
-                                            foreach ( $tmp as $feature_line ) {
-                                                $parts = explode( '|', $feature_line );
-                                                if ( count( $parts ) === 3 ) {
-                                                    $features_arr[] = [
-                                                        'feature_name' => trim( $parts[0] ),
-                                                        'badge_text'   => trim( $parts[1] ),
-                                                        'icon_type'    => trim( $parts[2] ),
-                                                    ];
-                                                }
+                                        // Parse features string (supports newlines and <br> tags)
+                                        $raw = $jersey['jersey_features'];
+                                        $raw = str_replace( ['<br />','<br/>','<br>','<p>','</p>'], "\n", $raw );
+                                        $lines = preg_split( '/\r?\n/', $raw );
+                                        foreach ( $lines as $line ) {
+                                            $parts = explode( '|', $line );
+                                            if ( count( $parts ) === 3 ) {
+                                                $features_arr[] = [
+                                                    'feature_name' => trim( $parts[0] ),
+                                                    'badge_text'   => trim( $parts[1] ),
+                                                    'icon_type'    => trim( $parts[2] ),
+                                                ];
                                             }
                                         }
                                         foreach ( $features_arr as $f ) {
@@ -644,21 +571,18 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                 <div class="pants-features">
                                     <?php 
                                     if ( ! empty( $pants['pants_features'] ) ) {
-                                        $features_src = $pants['pants_features'];
-                                        if ( is_array( $features_src ) ) {
-                                            $features_arr = $features_src;
-                                        } else {
-                                            $tmp = explode( "\n", $features_src );
-                                            $features_arr = [];
-                                            foreach ( $tmp as $feature_line ) {
-                                                $parts = explode( '|', $feature_line );
-                                                if ( count( $parts ) === 3 ) {
-                                                    $features_arr[] = [
-                                                        'feature_name' => trim( $parts[0] ),
-                                                        'badge_text'   => trim( $parts[1] ),
-                                                        'icon_type'    => trim( $parts[2] ),
-                                                    ];
-                                                }
+                                        // Parse features string (supports newlines and <br> tags)
+                                        $raw = $pants['pants_features'];
+                                        $raw = str_replace( ['<br />','<br/>','<br>','<p>','</p>'], "\n", $raw );
+                                        $lines = preg_split( '/\r?\n/', $raw );
+                                        foreach ( $lines as $line ) {
+                                            $parts = explode( '|', $line );
+                                            if ( count( $parts ) === 3 ) {
+                                                $features_arr[] = [
+                                                    'feature_name' => trim( $parts[0] ),
+                                                    'badge_text'   => trim( $parts[1] ),
+                                                    'icon_type'    => trim( $parts[2] ),
+                                                ];
                                             }
                                         }
                                         foreach ( $features_arr as $f ) {
