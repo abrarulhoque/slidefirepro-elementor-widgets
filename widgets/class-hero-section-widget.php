@@ -606,97 +606,95 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
         $image_alt = $settings['product_image_alt'] ?? 'SlideFirePro Custom Blue Jersey';
         
         ?>
-        <section class="slidefire-hero-section relative min-h-[65vh] flex items-center justify-center overflow-hidden">
+        <section class="slidefire-hero-section">
             <!-- Background gradients -->
-            <div class="absolute inset-0 z-0">
-                <div class="absolute inset-0 bg-gradient-to-br from-black via-background/80 to-background/60"></div>
-                <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/10"></div>
-                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
-            </div>
+            <div class="hero-bg-layer hero-bg-main"></div>
+            <div class="hero-bg-layer hero-bg-gradient-1"></div>
+            <div class="hero-bg-layer hero-bg-gradient-2"></div>
 
             <!-- Floating animation dots -->
-            <div class="absolute inset-0 z-5">
-                <div class="absolute top-20 left-20 w-2 h-2 bg-primary/60 rounded-full animate-float-slow"></div>
-                <div class="absolute top-40 right-32 w-1 h-1 bg-primary/40 rounded-full animate-float-medium"></div>
-                <div class="absolute bottom-32 left-40 w-3 h-3 bg-primary/30 rounded-full animate-float-slow"></div>
-                <div class="absolute top-60 left-60 w-1 h-1 bg-primary/50 rounded-full animate-float-fast"></div>
-                <div class="absolute bottom-40 right-20 w-2 h-2 bg-primary/35 rounded-full animate-float-medium"></div>
-                <div class="absolute top-32 left-80 w-1 h-1 bg-primary/45 rounded-full animate-float-medium"></div>
-                <div class="absolute bottom-60 left-20 w-1 h-1 bg-primary/40 rounded-full animate-float-fast"></div>
-                <div class="absolute top-80 right-60 w-2 h-2 bg-primary/30 rounded-full animate-float-slow"></div>
-                <div class="absolute bottom-20 right-80 w-1 h-1 bg-primary/50 rounded-full animate-float-medium"></div>
-                <div class="absolute top-16 right-16 w-0.5 h-0.5 bg-primary/60 rounded-full animate-float-fast"></div>
-                <div class="absolute top-72 left-32 w-0.5 h-0.5 bg-primary/55 rounded-full animate-float-medium"></div>
-                <div class="absolute bottom-16 left-80 w-0.5 h-0.5 bg-primary/40 rounded-full animate-float-slow"></div>
-                <div class="absolute top-96 right-40 w-0.5 h-0.5 bg-primary/45 rounded-full animate-float-fast"></div>
-                <div class="absolute bottom-80 right-16 w-0.5 h-0.5 bg-primary/50 rounded-full animate-float-medium"></div>
-                <div class="absolute top-48 left-96 w-1 h-1 bg-primary/35 rounded-full animate-float-slow"></div>
-                <div class="absolute bottom-48 right-96 w-1 h-1 bg-primary/40 rounded-full animate-float-fast"></div>
-                <div class="absolute top-24 right-72 w-0.5 h-0.5 bg-primary/45 rounded-full animate-float-medium"></div>
+            <div class="hero-floating-dots">
+                <div class="hero-dot hero-dot-1"></div>
+                <div class="hero-dot hero-dot-2"></div>
+                <div class="hero-dot hero-dot-3"></div>
+                <div class="hero-dot hero-dot-4"></div>
+                <div class="hero-dot hero-dot-5"></div>
+                <div class="hero-dot hero-dot-6"></div>
+                <div class="hero-dot hero-dot-7"></div>
+                <div class="hero-dot hero-dot-8"></div>
+                <div class="hero-dot hero-dot-9"></div>
+                <div class="hero-dot hero-dot-10"></div>
+                <div class="hero-dot hero-dot-11"></div>
+                <div class="hero-dot hero-dot-12"></div>
+                <div class="hero-dot hero-dot-13"></div>
+                <div class="hero-dot hero-dot-14"></div>
+                <div class="hero-dot hero-dot-15"></div>
+                <div class="hero-dot hero-dot-16"></div>
+                <div class="hero-dot hero-dot-17"></div>
             </div>
 
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="hero-container">
+                <div class="hero-grid">
                     <!-- Content Column -->
-                    <div class="max-w-2xl pt-8">
+                    <div class="hero-content">
                         <!-- Tagline -->
-                        <div class="flex items-center space-x-2 mb-6">
-                            <?php echo $this->sanitize_svg( $settings['tagline_icon'] ); ?>
-                            <span class="hero-tagline text-primary uppercase tracking-wider"><?php echo esc_html( $settings['tagline_text'] ); ?></span>
+                        <div class="hero-tagline-wrapper">
+                            <div class="hero-tagline-icon">
+                                <?php echo $this->sanitize_svg( $settings['tagline_icon'] ); ?>
+                            </div>
+                            <span class="hero-tagline"><?php echo esc_html( $settings['tagline_text'] ); ?></span>
                         </div>
 
                         <!-- Main Title -->
-                        <h1 class="hero-title text-5xl md:text-7xl mb-6 leading-tight title-industry">
-                            <span class="text-white"><?php echo esc_html( $settings['main_title'] ); ?></span>
+                        <h1 class="hero-title">
+                            <?php echo esc_html( $settings['main_title'] ); ?>
                         </h1>
 
                         <!-- Description -->
-                        <p class="hero-description text-xl text-muted-foreground mb-8"><?php echo esc_html( $settings['description_text'] ); ?></p>
+                        <p class="hero-description"><?php echo esc_html( $settings['description_text'] ); ?></p>
 
-                        <!-- Mobile Image (hidden on large screens) -->
-                        <div class="lg:hidden mb-8">
-                            <div class="relative bg-card/50 border-2 border-dashed border-primary/30 rounded-2xl p-6 aspect-square max-w-sm mx-auto backdrop-blur-sm">
-                                <div class="absolute inset-4 bg-gradient-to-br from-primary/10 to-transparent rounded-xl"></div>
-                                <div class="relative h-full flex items-center justify-center">
-                                    <div class="w-full h-full flex items-center justify-center">
-                                        <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="w-full h-full object-contain rounded-lg">
-                                    </div>
+                        <!-- Mobile Image -->
+                        <div class="hero-mobile-image">
+                            <div class="hero-image-card">
+                                <div class="hero-image-bg"></div>
+                                <div class="hero-image-wrapper">
+                                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="hero-image">
                                 </div>
-                                <div class="absolute top-4 right-4 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                                <div class="absolute bottom-4 left-4 w-1 h-1 bg-primary rounded-full animate-ping"></div>
+                                <div class="hero-image-dot-1"></div>
+                                <div class="hero-image-dot-2"></div>
                             </div>
                         </div>
 
                         <!-- Buttons -->
-                        <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <div class="hero-buttons">
                             <?php 
                             $primary_button_key = 'primary_button_link';
                             $this->add_link_attributes( $primary_button_key, $settings['primary_button_link'] );
                             ?>
-                            <a <?php echo $this->get_render_attribute_string( $primary_button_key ); ?> class="hero-primary-btn inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive h-10 rounded-md px-6 has-[>svg]:px-4 bg-primary hover:bg-primary/90 text-primary-foreground">
+                            <a <?php echo $this->get_render_attribute_string( $primary_button_key ); ?> class="hero-primary-btn">
                                 <?php echo esc_html( $settings['primary_button_text'] ); ?>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 h-5 w-5" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-btn-icon"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                             </a>
 
                             <?php 
                             $secondary_button_key = 'secondary_button_link';
                             $this->add_link_attributes( $secondary_button_key, $settings['secondary_button_link'] );
                             ?>
-                            <a <?php echo $this->get_render_attribute_string( $secondary_button_key ); ?> class="hero-secondary-btn inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-10 rounded-md px-6 has-[>svg]:px-4 border-primary text-primary hover:bg-primary/10">
+                            <a <?php echo $this->get_render_attribute_string( $secondary_button_key ); ?> class="hero-secondary-btn">
                                 <?php echo esc_html( $settings['secondary_button_text'] ); ?>
                             </a>
                         </div>
 
                         <!-- Teams Section -->
-                        <div class="text-left">
-                            <h3 class="teams-title text-2xl md:text-3xl mb-6 title-industry">
-                                <span class="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent"><?php echo esc_html( $settings['teams_title'] ); ?></span>
+                        <div class="hero-teams">
+                            <h3 class="teams-title">
+                                <?php echo esc_html( $settings['teams_title'] ); ?>
                             </h3>
-                            <div class="relative overflow-hidden">
-                                <div class="flex space-x-8 animate-[scroll_25s_linear_infinite]">
+                            <div class="teams-scroll-container">
+                                <div class="teams-scroll-wrapper">
                                     <?php foreach ( $settings['team_icons'] as $index => $item ) : ?>
-                                        <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary/50 transition-all duration-300 hover:scale-105">
-                                            <div class="<?php echo esc_attr( $this->get_icon_color_class( $item['icon_color'] ) ); ?> opacity-70 hover:opacity-100 transition-opacity">
+                                        <div class="team-icon-card">
+                                            <div class="team-icon <?php echo esc_attr( $this->get_icon_color_class( $item['icon_color'] ) ); ?>">
                                                 <?php echo $this->sanitize_svg( $item['team_icon'] ); ?>
                                             </div>
                                         </div>
@@ -704,8 +702,8 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
                                     
                                     <!-- Duplicate icons for seamless scroll -->
                                     <?php foreach ( $settings['team_icons'] as $index => $item ) : ?>
-                                        <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary/50 transition-all duration-300 hover:scale-105">
-                                            <div class="<?php echo esc_attr( $this->get_icon_color_class( $item['icon_color'] ) ); ?> opacity-70 hover:opacity-100 transition-opacity">
+                                        <div class="team-icon-card">
+                                            <div class="team-icon <?php echo esc_attr( $this->get_icon_color_class( $item['icon_color'] ) ); ?>">
                                                 <?php echo $this->sanitize_svg( $item['team_icon'] ); ?>
                                             </div>
                                         </div>
@@ -715,38 +713,24 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
                         </div>
                     </div>
 
-                    <!-- Image Column (hidden on mobile, shown on large screens) -->
-                    <div class="relative hidden lg:block">
-                        <div class="relative bg-card/50 border-2 border-dashed border-primary/30 rounded-2xl p-8 aspect-square max-w-md mx-auto backdrop-blur-sm">
-                            <div class="absolute inset-4 bg-gradient-to-br from-primary/10 to-transparent rounded-xl"></div>
-                            <div class="relative h-full flex items-center justify-center">
-                                <div class="w-full h-full flex items-center justify-center">
-                                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="w-full h-full object-contain rounded-lg">
-                                </div>
+                    <!-- Image Column (desktop) -->
+                    <div class="hero-desktop-image">
+                        <div class="hero-image-card hero-image-card-desktop">
+                            <div class="hero-image-bg"></div>
+                            <div class="hero-image-wrapper">
+                                <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="hero-image">
                             </div>
-                            <div class="absolute top-4 right-4 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                            <div class="absolute bottom-4 left-4 w-1 h-1 bg-primary rounded-full animate-ping"></div>
+                            <div class="hero-image-dot-1"></div>
+                            <div class="hero-image-dot-2"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Additional decorative elements -->
-            <div class="absolute top-20 right-20 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-            <div class="absolute bottom-40 left-20 w-1 h-1 bg-primary rounded-full animate-ping"></div>
-            <div class="absolute top-1/2 right-40 w-3 h-3 border border-primary rounded-full animate-pulse"></div>
-
-            <!-- Animation CSS -->
-            <style>
-                @keyframes scroll {
-                  from {
-                    transform: translateX(0);
-                  }
-                  to {
-                    transform: translateX(-50%);
-                  }
-                }
-            </style>
+            <div class="hero-extra-dot hero-extra-dot-1"></div>
+            <div class="hero-extra-dot hero-extra-dot-2"></div>
+            <div class="hero-extra-dot hero-extra-dot-3"></div>
         </section>
         <?php
     }
@@ -771,89 +755,87 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
             return colorClasses[color] || 'text-primary';
         }
         #>
-        <section class="slidefire-hero-section relative min-h-[65vh] flex items-center justify-center overflow-hidden">
+        <section class="slidefire-hero-section">
             <!-- Background gradients -->
-            <div class="absolute inset-0 z-0">
-                <div class="absolute inset-0 bg-gradient-to-br from-black via-background/80 to-background/60"></div>
-                <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/10"></div>
-                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
-            </div>
+            <div class="hero-bg-layer hero-bg-main"></div>
+            <div class="hero-bg-layer hero-bg-gradient-1"></div>
+            <div class="hero-bg-layer hero-bg-gradient-2"></div>
 
             <!-- Floating animation dots -->
-            <div class="absolute inset-0 z-5">
-                <div class="absolute top-20 left-20 w-2 h-2 bg-primary/60 rounded-full animate-float-slow"></div>
-                <div class="absolute top-40 right-32 w-1 h-1 bg-primary/40 rounded-full animate-float-medium"></div>
-                <div class="absolute bottom-32 left-40 w-3 h-3 bg-primary/30 rounded-full animate-float-slow"></div>
-                <div class="absolute top-60 left-60 w-1 h-1 bg-primary/50 rounded-full animate-float-fast"></div>
-                <div class="absolute bottom-40 right-20 w-2 h-2 bg-primary/35 rounded-full animate-float-medium"></div>
-                <div class="absolute top-32 left-80 w-1 h-1 bg-primary/45 rounded-full animate-float-medium"></div>
-                <div class="absolute bottom-60 left-20 w-1 h-1 bg-primary/40 rounded-full animate-float-fast"></div>
-                <div class="absolute top-80 right-60 w-2 h-2 bg-primary/30 rounded-full animate-float-slow"></div>
-                <div class="absolute bottom-20 right-80 w-1 h-1 bg-primary/50 rounded-full animate-float-medium"></div>
-                <div class="absolute top-16 right-16 w-0.5 h-0.5 bg-primary/60 rounded-full animate-float-fast"></div>
-                <div class="absolute top-72 left-32 w-0.5 h-0.5 bg-primary/55 rounded-full animate-float-medium"></div>
-                <div class="absolute bottom-16 left-80 w-0.5 h-0.5 bg-primary/40 rounded-full animate-float-slow"></div>
-                <div class="absolute top-96 right-40 w-0.5 h-0.5 bg-primary/45 rounded-full animate-float-fast"></div>
-                <div class="absolute bottom-80 right-16 w-0.5 h-0.5 bg-primary/50 rounded-full animate-float-medium"></div>
-                <div class="absolute top-48 left-96 w-1 h-1 bg-primary/35 rounded-full animate-float-slow"></div>
-                <div class="absolute bottom-48 right-96 w-1 h-1 bg-primary/40 rounded-full animate-float-fast"></div>
-                <div class="absolute top-24 right-72 w-0.5 h-0.5 bg-primary/45 rounded-full animate-float-medium"></div>
+            <div class="hero-floating-dots">
+                <div class="hero-dot hero-dot-1"></div>
+                <div class="hero-dot hero-dot-2"></div>
+                <div class="hero-dot hero-dot-3"></div>
+                <div class="hero-dot hero-dot-4"></div>
+                <div class="hero-dot hero-dot-5"></div>
+                <div class="hero-dot hero-dot-6"></div>
+                <div class="hero-dot hero-dot-7"></div>
+                <div class="hero-dot hero-dot-8"></div>
+                <div class="hero-dot hero-dot-9"></div>
+                <div class="hero-dot hero-dot-10"></div>
+                <div class="hero-dot hero-dot-11"></div>
+                <div class="hero-dot hero-dot-12"></div>
+                <div class="hero-dot hero-dot-13"></div>
+                <div class="hero-dot hero-dot-14"></div>
+                <div class="hero-dot hero-dot-15"></div>
+                <div class="hero-dot hero-dot-16"></div>
+                <div class="hero-dot hero-dot-17"></div>
             </div>
 
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="hero-container">
+                <div class="hero-grid">
                     <!-- Content Column -->
-                    <div class="max-w-2xl pt-8">
+                    <div class="hero-content">
                         <!-- Tagline -->
-                        <div class="flex items-center space-x-2 mb-6">
-                            {{{ settings.tagline_icon }}}
-                            <span class="hero-tagline text-primary uppercase tracking-wider">{{{ settings.tagline_text }}}</span>
+                        <div class="hero-tagline-wrapper">
+                            <div class="hero-tagline-icon">
+                                {{{ settings.tagline_icon }}}
+                            </div>
+                            <span class="hero-tagline">{{{ settings.tagline_text }}}</span>
                         </div>
 
                         <!-- Main Title -->
-                        <h1 class="hero-title text-5xl md:text-7xl mb-6 leading-tight title-industry">
-                            <span class="text-white">{{{ settings.main_title }}}</span>
+                        <h1 class="hero-title">
+                            {{{ settings.main_title }}}
                         </h1>
 
                         <!-- Description -->
-                        <p class="hero-description text-xl text-muted-foreground mb-8">{{{ settings.description_text }}}</p>
+                        <p class="hero-description">{{{ settings.description_text }}}</p>
 
-                        <!-- Mobile Image (hidden on large screens) -->
-                        <div class="lg:hidden mb-8">
-                            <div class="relative bg-card/50 border-2 border-dashed border-primary/30 rounded-2xl p-6 aspect-square max-w-sm mx-auto backdrop-blur-sm">
-                                <div class="absolute inset-4 bg-gradient-to-br from-primary/10 to-transparent rounded-xl"></div>
-                                <div class="relative h-full flex items-center justify-center">
-                                    <div class="w-full h-full flex items-center justify-center">
-                                        <img src="{{{ imageUrl }}}" alt="{{{ imageAlt }}}" class="w-full h-full object-contain rounded-lg">
-                                    </div>
+                        <!-- Mobile Image -->
+                        <div class="hero-mobile-image">
+                            <div class="hero-image-card">
+                                <div class="hero-image-bg"></div>
+                                <div class="hero-image-wrapper">
+                                    <img src="{{{ imageUrl }}}" alt="{{{ imageAlt }}}" class="hero-image">
                                 </div>
-                                <div class="absolute top-4 right-4 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                                <div class="absolute bottom-4 left-4 w-1 h-1 bg-primary rounded-full animate-ping"></div>
+                                <div class="hero-image-dot-1"></div>
+                                <div class="hero-image-dot-2"></div>
                             </div>
                         </div>
 
                         <!-- Buttons -->
-                        <div class="flex flex-col sm:flex-row gap-4 mb-12">
-                            <a href="{{{ settings.primary_button_link.url }}}" class="hero-primary-btn inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive h-10 rounded-md px-6 has-[>svg]:px-4 bg-primary hover:bg-primary/90 text-primary-foreground">
+                        <div class="hero-buttons">
+                            <a href="{{{ settings.primary_button_link.url }}}" class="hero-primary-btn">
                                 {{{ settings.primary_button_text }}}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 h-5 w-5" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-btn-icon"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                             </a>
 
-                            <a href="{{{ settings.secondary_button_link.url }}}" class="hero-secondary-btn inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-10 rounded-md px-6 has-[>svg]:px-4 border-primary text-primary hover:bg-primary/10">
+                            <a href="{{{ settings.secondary_button_link.url }}}" class="hero-secondary-btn">
                                 {{{ settings.secondary_button_text }}}
                             </a>
                         </div>
 
                         <!-- Teams Section -->
-                        <div class="text-left">
-                            <h3 class="teams-title text-2xl md:text-3xl mb-6 title-industry">
-                                <span class="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">{{{ settings.teams_title }}}</span>
+                        <div class="hero-teams">
+                            <h3 class="teams-title">
+                                {{{ settings.teams_title }}}
                             </h3>
-                            <div class="relative overflow-hidden">
-                                <div class="flex space-x-8 animate-[scroll_25s_linear_infinite]">
+                            <div class="teams-scroll-container">
+                                <div class="teams-scroll-wrapper">
                                     <# _.each( settings.team_icons, function( item, index ) { #>
-                                        <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary/50 transition-all duration-300 hover:scale-105">
-                                            <div class="{{{ getIconColorClass(item.icon_color) }}} opacity-70 hover:opacity-100 transition-opacity">
+                                        <div class="team-icon-card">
+                                            <div class="team-icon {{{ getIconColorClass(item.icon_color) }}}">
                                                 {{{ item.team_icon }}}
                                             </div>
                                         </div>
@@ -861,8 +843,8 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
                                     
                                     <!-- Duplicate icons for seamless scroll -->
                                     <# _.each( settings.team_icons, function( item, index ) { #>
-                                        <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary/50 transition-all duration-300 hover:scale-105">
-                                            <div class="{{{ getIconColorClass(item.icon_color) }}} opacity-70 hover:opacity-100 transition-opacity">
+                                        <div class="team-icon-card">
+                                            <div class="team-icon {{{ getIconColorClass(item.icon_color) }}}">
                                                 {{{ item.team_icon }}}
                                             </div>
                                         </div>
@@ -872,38 +854,24 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
                         </div>
                     </div>
 
-                    <!-- Image Column (hidden on mobile, shown on large screens) -->
-                    <div class="relative hidden lg:block">
-                        <div class="relative bg-card/50 border-2 border-dashed border-primary/30 rounded-2xl p-8 aspect-square max-w-md mx-auto backdrop-blur-sm">
-                            <div class="absolute inset-4 bg-gradient-to-br from-primary/10 to-transparent rounded-xl"></div>
-                            <div class="relative h-full flex items-center justify-center">
-                                <div class="w-full h-full flex items-center justify-center">
-                                    <img src="{{{ imageUrl }}}" alt="{{{ imageAlt }}}" class="w-full h-full object-contain rounded-lg">
-                                </div>
+                    <!-- Image Column (desktop) -->
+                    <div class="hero-desktop-image">
+                        <div class="hero-image-card hero-image-card-desktop">
+                            <div class="hero-image-bg"></div>
+                            <div class="hero-image-wrapper">
+                                <img src="{{{ imageUrl }}}" alt="{{{ imageAlt }}}" class="hero-image">
                             </div>
-                            <div class="absolute top-4 right-4 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                            <div class="absolute bottom-4 left-4 w-1 h-1 bg-primary rounded-full animate-ping"></div>
+                            <div class="hero-image-dot-1"></div>
+                            <div class="hero-image-dot-2"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Additional decorative elements -->
-            <div class="absolute top-20 right-20 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-            <div class="absolute bottom-40 left-20 w-1 h-1 bg-primary rounded-full animate-ping"></div>
-            <div class="absolute top-1/2 right-40 w-3 h-3 border border-primary rounded-full animate-pulse"></div>
-
-            <!-- Animation CSS -->
-            <style>
-                @keyframes scroll {
-                  from {
-                    transform: translateX(0);
-                  }
-                  to {
-                    transform: translateX(-50%);
-                  }
-                }
-            </style>
+            <div class="hero-extra-dot hero-extra-dot-1"></div>
+            <div class="hero-extra-dot hero-extra-dot-2"></div>
+            <div class="hero-extra-dot hero-extra-dot-3"></div>
         </section>
         <?php
     }

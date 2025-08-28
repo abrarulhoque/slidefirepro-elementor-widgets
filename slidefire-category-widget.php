@@ -145,7 +145,7 @@ class SlideFire_Category_Widget_Plugin {
             'slidefire-category-widget',
             SLIDEFIRE_CATEGORY_WIDGET_URL . 'assets/css/style.css',
             [],
-            '1.0.0'
+            '1.1.0'
         );
     }
 
@@ -157,7 +157,7 @@ class SlideFire_Category_Widget_Plugin {
             'slidefire-category-widget',
             SLIDEFIRE_CATEGORY_WIDGET_URL . 'assets/js/script.js',
             [ 'jquery' ],
-            '1.0.0',
+            '1.1.0',
             true
         );
     }
