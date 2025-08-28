@@ -478,6 +478,8 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                         $raw = $jersey['jersey_features'];
                                         $raw = str_replace( ['<br />','<br/>','<br>','<p>','</p>'], "\n", $raw );
                                         $lines = preg_split( '/\r?\n/', $raw );
+                                        
+                                        $features_arr = []; // Initialize the array
                                         foreach ( $lines as $line ) {
                                             $parts = explode( '|', $line );
                                             if ( count( $parts ) === 3 ) {
@@ -488,22 +490,25 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                                 ];
                                             }
                                         }
-                                        foreach ( $features_arr as $f ) {
-                                            $name = $f['feature_name'];
-                                            $badge = $f['badge_text'];
-                                            $icon_type = $f['icon_type'];
+                                        
+                                        if ( $features_arr ) { // Guard the loop
+                                            foreach ( $features_arr as $f ) {
+                                                $name = $f['feature_name'];
+                                                $badge = $f['badge_text'];
+                                                $icon_type = $f['icon_type'];
 
-                                            $text_class = ( $icon_type === 'check' ) ? 'jersey-feature-name' : 'muted-feature-name';
-                                            $svg = ( $icon_type === 'check' ) ? '<svg class="jersey-icon check-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>' : '<svg class="jersey-icon x-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
-                                            ?>
-                                                <div class="jersey-feature">
-                                                    <div class="jersey-feature-info">
-                                                        <?php echo $svg; ?>
-                                                        <span class="<?php echo esc_attr( $text_class ); ?>"><?php echo esc_html( $name ); ?></span>
+                                                $text_class = ( $icon_type === 'check' ) ? 'jersey-feature-name' : 'muted-feature-name';
+                                                $svg = ( $icon_type === 'check' ) ? '<svg class="jersey-icon check-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>' : '<svg class="jersey-icon x-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
+                                                ?>
+                                                    <div class="jersey-feature">
+                                                        <div class="jersey-feature-info">
+                                                            <?php echo $svg; ?>
+                                                            <span class="<?php echo esc_attr( $text_class ); ?>"><?php echo esc_html( $name ); ?></span>
+                                                        </div>
+                                                        <span class="jersey-feature-badge"><?php echo esc_html( $badge ); ?></span>
                                                     </div>
-                                                    <span class="jersey-feature-badge"><?php echo esc_html( $badge ); ?></span>
-                                                </div>
-                                            <?php
+                                                <?php
+                                            }
                                         }
                                     }
                                     ?>
@@ -575,6 +580,8 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                         $raw = $pants['pants_features'];
                                         $raw = str_replace( ['<br />','<br/>','<br>','<p>','</p>'], "\n", $raw );
                                         $lines = preg_split( '/\r?\n/', $raw );
+                                        
+                                        $features_arr = []; // Initialize the array
                                         foreach ( $lines as $line ) {
                                             $parts = explode( '|', $line );
                                             if ( count( $parts ) === 3 ) {
@@ -585,22 +592,25 @@ class SlideFire_Jersey_Type_Selector_Widget extends \Elementor\Widget_Base {
                                                 ];
                                             }
                                         }
-                                        foreach ( $features_arr as $f ) {
-                                            $name = $f['feature_name'];
-                                            $badge = $f['badge_text'];
-                                            $icon_type = $f['icon_type'];
+                                        
+                                        if ( $features_arr ) { // Guard the loop
+                                            foreach ( $features_arr as $f ) {
+                                                $name = $f['feature_name'];
+                                                $badge = $f['badge_text'];
+                                                $icon_type = $f['icon_type'];
 
-                                            $text_class = ( $icon_type === 'check' ) ? 'pants-feature-name' : 'muted-feature-name';
-                                            $svg = ( $icon_type === 'check' ) ? '<svg class="pants-icon check-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>' : '<svg class="pants-icon x-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
-                                            ?>
-                                                <div class="pants-feature">
-                                                    <div class="pants-feature-info">
-                                                        <?php echo $svg; ?>
-                                                        <span class="<?php echo esc_attr( $text_class ); ?>"><?php echo esc_html( $name ); ?></span>
+                                                $text_class = ( $icon_type === 'check' ) ? 'pants-feature-name' : 'muted-feature-name';
+                                                $svg = ( $icon_type === 'check' ) ? '<svg class="pants-icon check-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>' : '<svg class="pants-icon x-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
+                                                ?>
+                                                    <div class="pants-feature">
+                                                        <div class="pants-feature-info">
+                                                            <?php echo $svg; ?>
+                                                            <span class="<?php echo esc_attr( $text_class ); ?>"><?php echo esc_html( $name ); ?></span>
+                                                        </div>
+                                                        <span class="pants-feature-badge"><?php echo esc_html( $badge ); ?></span>
                                                     </div>
-                                                    <span class="pants-feature-badge"><?php echo esc_html( $badge ); ?></span>
-                                                </div>
-                                            <?php
+                                                <?php
+                                            }
                                         }
                                     }
                                     ?>
