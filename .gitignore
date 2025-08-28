@@ -1,0 +1,9 @@
+# Ignore resources folder
+resources/
+
+# Ignore documentation and info files
+guide.md
+plugin-info.txt
+
+# Ignore all zip files
+*.zip
