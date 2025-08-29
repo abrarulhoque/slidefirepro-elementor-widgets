@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: SlideFirePro Widgets
- * Description: Professional Elementor widgets suite for SlideFirePro - tactical gear customization and product showcase widgets
- * Version: 1.5.0
+ * Description: Professional Elementor widgets suite for SlideFirePro - tactical gear customization, product showcase, and navigation widgets
+ * Version: 1.6.0
  * Author: Abrar
  * Text Domain: slidefire-category-widget
  * Elementor tested up to: 3.25.0
@@ -136,11 +136,13 @@ class SlideFire_Category_Widget_Plugin {
         require_once( SLIDEFIRE_CATEGORY_WIDGET_PATH . 'widgets/class-category-nav-widget.php' );
         require_once( SLIDEFIRE_CATEGORY_WIDGET_PATH . 'widgets/class-product-features-widget.php' );
         require_once( SLIDEFIRE_CATEGORY_WIDGET_PATH . 'widgets/class-jersey-type-selector-widget.php' );
+        require_once( SLIDEFIRE_CATEGORY_WIDGET_PATH . 'widgets/class-navbar-widget.php' );
         $widgets_manager->register( new \SlideFire_Category_Navigation_Widget() );
         $widgets_manager->register( new \SlideFire_Hero_Section_Widget() );
         $widgets_manager->register( new \SlideFire_Category_Nav_Widget() );
         $widgets_manager->register( new \SlideFire_Product_Features_Widget() );
         $widgets_manager->register( new \SlideFire_Jersey_Type_Selector_Widget() );
+        $widgets_manager->register( new \SlideFire_Navbar_Widget() );
     }
 
     /**
@@ -151,7 +153,7 @@ class SlideFire_Category_Widget_Plugin {
             'slidefire-category-widget',
             SLIDEFIRE_CATEGORY_WIDGET_URL . 'assets/css/style.css',
             [],
-            '1.5.0'
+            '1.6.0'
         );
     }
 
@@ -163,7 +165,7 @@ class SlideFire_Category_Widget_Plugin {
             'slidefire-category-widget',
             SLIDEFIRE_CATEGORY_WIDGET_URL . 'assets/js/script.js',
             [ 'jquery' ],
-            '1.5.0',
+            '1.6.0',
             true
         );
     }
