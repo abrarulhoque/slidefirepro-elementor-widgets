@@ -1041,6 +1041,40 @@
    CATEGORY NAV WIDGET STYLES
    ==================================================== */
 
+/* --- Guard rails so animated/offset dots can't widen the viewport --- */
+.slidefire-hero-section,
+.slidefire-hero-section .hero-floating-dots {
+  max-width: 100vw;
+  overflow-x: clip;       /* modern */
+  overflow-y: visible;
+}
+
+@supports not (overflow: clip) {
+  .slidefire-hero-section,
+  .slidefire-hero-section .hero-floating-dots {
+    overflow-x: hidden;   /* fallback */
+  }
+}
+
+/* --- Mobile: position dots with percentages instead of big rems,
+       and scale down the ring/ping so it never leaks horizontally --- */
+@media (max-width: 767px) {
+  /* keep only a handful of dots and pin them inside the viewport */
+  .hero-dot-1 { top: 8%;  left: 6%;  width: 6px; height: 6px; }
+  .hero-dot-2 { top: 20%; right: 10%; width: 4px; height: 4px; }
+  .hero-dot-3 { bottom: 18%; left: 12%; width: 10px; height: 10px; }
+  .hero-dot-4 { top: 36%; left: 34%; width: 4px; height: 4px; }
+  .hero-dot-5 { bottom: 22%; right: 8%; width: 6px; height: 6px; }
+
+  /* prevent animated rings from expanding the scroll box */
+  .hero-image-dot-2,
+  .hero-extra-dot-3 {
+    transform-origin: center;
+    /* optional: slightly smaller ring on tiny screens */
+    animation-duration: 1.2s;
+  }
+}
+
 /* Category Nav Main Container */
 .slidefire-category-nav {
   border-bottom: 1px solid rgba(51, 51, 51, 0.5);
