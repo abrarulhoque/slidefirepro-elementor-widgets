@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SlideFirePro Widgets
  * Description: Professional Elementor widgets suite for SlideFirePro - tactical gear customization, product showcase, and navigation widgets
- * Version: 1.6.0
+ * Version: 1.6.1
  * Author: Abrar
  * Text Domain: slidefire-category-widget
  * Elementor tested up to: 3.25.0
@@ -153,7 +153,7 @@ class SlideFire_Category_Widget_Plugin {
             'slidefire-category-widget',
             SLIDEFIRE_CATEGORY_WIDGET_URL . 'assets/css/style.css',
             [],
-            '1.6.0'
+            '1.6.1'
         );
     }
 
@@ -165,7 +165,7 @@ class SlideFire_Category_Widget_Plugin {
             'slidefire-category-widget',
             SLIDEFIRE_CATEGORY_WIDGET_URL . 'assets/js/script.js',
             [ 'jquery' ],
-            '1.6.0',
+            '1.6.1',
             true
         );
     }
