@@ -965,16 +965,46 @@
     padding: 1rem 0;
   }
 
+  /* Scale down heading for small viewports */
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    line-height: 1.15;
   }
 
+  /* Improve body copy legibility on mobile */
   .hero-description {
-    font-size: 1.125rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Ensure image card fits narrow screens */
+  .hero-image-card {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  /* Enforce correct image visibility per device */
+  .slidefire-hero-section .hero-desktop-image {
+    display: none !important;
+  }
+  .slidefire-hero-section .hero-mobile-image {
+    display: block !important;
   }
 
   .teams-title {
     font-size: 1.5rem;
+  }
+
+  /* Buttons stack full-width for touch comfort */
+  .hero-buttons {
+    gap: 0.75rem;
+    flex-direction: column; /* override md breakpoint */
+  }
+  .hero-primary-btn,
+  .hero-secondary-btn {
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
   }
 
   /* Hide some dots on mobile for better performance */
