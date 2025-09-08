@@ -293,6 +293,19 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
         $repeater = new \Elementor\Repeater();
 
         $repeater->add_control(
+            'team_icon_type',
+            [
+                'label' => esc_html__( 'Icon Type', 'slidefire-category-widget' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'svg',
+                'options' => [
+                    'svg' => esc_html__( 'SVG Icon', 'slidefire-category-widget' ),
+                    'image' => esc_html__( 'Image Logo', 'slidefire-category-widget' ),
+                ],
+            ]
+        );
+
+        $repeater->add_control(
             'team_icon',
             [
                 'label' => esc_html__( 'Team Icon SVG', 'slidefire-category-widget' ),
@@ -300,6 +313,89 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
                 'default' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield w-8 h-8 text-primary opacity-70 hover:opacity-100 transition-opacity" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>',
                 'placeholder' => esc_html__( 'Enter SVG icon code', 'slidefire-category-widget' ),
                 'rows' => 4,
+                'condition' => [
+                    'team_icon_type' => 'svg',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'team_image',
+            [
+                'label' => esc_html__( 'Team Logo Image', 'slidefire-category-widget' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => '',
+                ],
+                'condition' => [
+                    'team_icon_type' => 'image',
+                ],
+            ]
+        );
+
+        $repeater->add_responsive_control(
+            'team_image_width',
+            [
+                'label' => esc_html__( 'Image Width', 'slidefire-category-widget' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'rem', 'em' ],
+                'range' => [
+                    'px' => [
+                        'min' => 16,
+                        'max' => 100,
+                    ],
+                    'rem' => [
+                        'min' => 1,
+                        'max' => 6,
+                    ],
+                    'em' => [
+                        'min' => 1,
+                        'max' => 6,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 32,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} {{CURRENT_ITEM}} .team-logo-image' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'team_icon_type' => 'image',
+                ],
+            ]
+        );
+
+        $repeater->add_responsive_control(
+            'team_image_height',
+            [
+                'label' => esc_html__( 'Image Height', 'slidefire-category-widget' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'rem', 'em', 'auto' ],
+                'range' => [
+                    'px' => [
+                        'min' => 16,
+                        'max' => 100,
+                    ],
+                    'rem' => [
+                        'min' => 1,
+                        'max' => 6,
+                    ],
+                    'em' => [
+                        'min' => 1,
+                        'max' => 6,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'auto',
+                    'size' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} {{CURRENT_ITEM}} .team-logo-image' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'team_icon_type' => 'image',
+                ],
             ]
         );
 
@@ -315,6 +411,9 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
                     'blue' => esc_html__( 'Blue', 'slidefire-category-widget' ),
                     'yellow' => esc_html__( 'Yellow', 'slidefire-category-widget' ),
                     'purple' => esc_html__( 'Purple', 'slidefire-category-widget' ),
+                ],
+                'condition' => [
+                    'team_icon_type' => 'svg',
                 ],
             ]
         );
@@ -796,18 +895,30 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
                                 <div class="teams-scroll-wrapper">
                                     <?php foreach ( $settings['team_icons'] as $index => $item ) : ?>
                                         <div class="team-icon-card">
-                                            <div class="team-icon <?php echo esc_attr( $this->get_icon_color_class( $item['icon_color'] ) ); ?>">
-                                                <?php echo $this->sanitize_svg( $item['team_icon'] ); ?>
-                                            </div>
+                                            <?php if ( isset( $item['team_icon_type'] ) && $item['team_icon_type'] === 'image' && !empty( $item['team_image']['url'] ) ) : ?>
+                                                <div class="team-icon">
+                                                    <img src="<?php echo esc_url( $item['team_image']['url'] ); ?>" alt="" class="team-logo-image">
+                                                </div>
+                                            <?php else : ?>
+                                                <div class="team-icon <?php echo esc_attr( $this->get_icon_color_class( $item['icon_color'] ?? 'primary' ) ); ?>">
+                                                    <?php echo $this->sanitize_svg( $item['team_icon'] ); ?>
+                                                </div>
+                                            <?php endif; ?>
                                         </div>
                                     <?php endforeach; ?>
                                     
                                     <!-- Duplicate icons for seamless scroll -->
                                     <?php foreach ( $settings['team_icons'] as $index => $item ) : ?>
                                         <div class="team-icon-card">
-                                            <div class="team-icon <?php echo esc_attr( $this->get_icon_color_class( $item['icon_color'] ) ); ?>">
-                                                <?php echo $this->sanitize_svg( $item['team_icon'] ); ?>
-                                            </div>
+                                            <?php if ( isset( $item['team_icon_type'] ) && $item['team_icon_type'] === 'image' && !empty( $item['team_image']['url'] ) ) : ?>
+                                                <div class="team-icon">
+                                                    <img src="<?php echo esc_url( $item['team_image']['url'] ); ?>" alt="" class="team-logo-image">
+                                                </div>
+                                            <?php else : ?>
+                                                <div class="team-icon <?php echo esc_attr( $this->get_icon_color_class( $item['icon_color'] ?? 'primary' ) ); ?>">
+                                                    <?php echo $this->sanitize_svg( $item['team_icon'] ); ?>
+                                                </div>
+                                            <?php endif; ?>
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
@@ -943,18 +1054,30 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
                                 <div class="teams-scroll-wrapper">
                                     <# _.each( settings.team_icons, function( item, index ) { #>
                                         <div class="team-icon-card">
-                                            <div class="team-icon {{{ getIconColorClass(item.icon_color) }}}">
-                                                {{{ item.team_icon }}}
-                                            </div>
+                                            <# if ( item.team_icon_type === 'image' && item.team_image.url ) { #>
+                                                <div class="team-icon">
+                                                    <img src="{{{ item.team_image.url }}}" alt="" class="team-logo-image">
+                                                </div>
+                                            <# } else { #>
+                                                <div class="team-icon {{{ getIconColorClass(item.icon_color || 'primary') }}}">
+                                                    {{{ item.team_icon }}}
+                                                </div>
+                                            <# } #>
                                         </div>
                                     <# }); #>
                                     
                                     <!-- Duplicate icons for seamless scroll -->
                                     <# _.each( settings.team_icons, function( item, index ) { #>
                                         <div class="team-icon-card">
-                                            <div class="team-icon {{{ getIconColorClass(item.icon_color) }}}">
-                                                {{{ item.team_icon }}}
-                                            </div>
+                                            <# if ( item.team_icon_type === 'image' && item.team_image.url ) { #>
+                                                <div class="team-icon">
+                                                    <img src="{{{ item.team_image.url }}}" alt="" class="team-logo-image">
+                                                </div>
+                                            <# } else { #>
+                                                <div class="team-icon {{{ getIconColorClass(item.icon_color || 'primary') }}}">
+                                                    {{{ item.team_icon }}}
+                                                </div>
+                                            <# } #>
                                         </div>
                                     <# }); #>
                                 </div>
