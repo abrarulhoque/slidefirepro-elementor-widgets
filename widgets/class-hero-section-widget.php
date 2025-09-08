@@ -73,6 +73,19 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
         );
 
         $this->add_control(
+            'tagline_icon_type',
+            [
+                'label' => esc_html__( 'Icon Type', 'slidefire-category-widget' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'svg',
+                'options' => [
+                    'svg' => esc_html__( 'SVG Icon', 'slidefire-category-widget' ),
+                    'image' => esc_html__( 'Image Logo', 'slidefire-category-widget' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
             'tagline_icon',
             [
                 'label' => esc_html__( 'Tagline Icon SVG', 'slidefire-category-widget' ),
@@ -80,6 +93,89 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
                 'default' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap h-6 w-6 text-primary" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>',
                 'placeholder' => esc_html__( 'Enter SVG icon code', 'slidefire-category-widget' ),
                 'rows' => 3,
+                'condition' => [
+                    'tagline_icon_type' => 'svg',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'tagline_image',
+            [
+                'label' => esc_html__( 'Tagline Logo Image', 'slidefire-category-widget' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => '',
+                ],
+                'condition' => [
+                    'tagline_icon_type' => 'image',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'tagline_image_width',
+            [
+                'label' => esc_html__( 'Image Width', 'slidefire-category-widget' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'rem', 'em' ],
+                'range' => [
+                    'px' => [
+                        'min' => 16,
+                        'max' => 200,
+                    ],
+                    'rem' => [
+                        'min' => 1,
+                        'max' => 12,
+                    ],
+                    'em' => [
+                        'min' => 1,
+                        'max' => 12,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 24,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .hero-tagline-image' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'tagline_icon_type' => 'image',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'tagline_image_height',
+            [
+                'label' => esc_html__( 'Image Height', 'slidefire-category-widget' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'rem', 'em', 'auto' ],
+                'range' => [
+                    'px' => [
+                        'min' => 16,
+                        'max' => 200,
+                    ],
+                    'rem' => [
+                        'min' => 1,
+                        'max' => 12,
+                    ],
+                    'em' => [
+                        'min' => 1,
+                        'max' => 12,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'auto',
+                    'size' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .hero-tagline-image' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'tagline_icon_type' => 'image',
+                ],
             ]
         );
 
@@ -639,9 +735,15 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
                     <div class="hero-content">
                         <!-- Tagline -->
                         <div class="hero-tagline-wrapper">
-                            <div class="hero-tagline-icon">
-                                <?php echo $this->sanitize_svg( $settings['tagline_icon'] ); ?>
-                            </div>
+                            <?php if ( $settings['tagline_icon_type'] === 'image' && !empty( $settings['tagline_image']['url'] ) ) : ?>
+                                <div class="hero-tagline-icon">
+                                    <img src="<?php echo esc_url( $settings['tagline_image']['url'] ); ?>" alt="" class="hero-tagline-image">
+                                </div>
+                            <?php elseif ( $settings['tagline_icon_type'] === 'svg' && !empty( $settings['tagline_icon'] ) ) : ?>
+                                <div class="hero-tagline-icon">
+                                    <?php echo $this->sanitize_svg( $settings['tagline_icon'] ); ?>
+                                </div>
+                            <?php endif; ?>
                             <span class="hero-tagline"><?php echo esc_html( $settings['tagline_text'] ); ?></span>
                         </div>
 
@@ -788,9 +890,15 @@ class SlideFire_Hero_Section_Widget extends \Elementor\Widget_Base {
                     <div class="hero-content">
                         <!-- Tagline -->
                         <div class="hero-tagline-wrapper">
-                            <div class="hero-tagline-icon">
-                                {{{ settings.tagline_icon }}}
-                            </div>
+                            <# if ( settings.tagline_icon_type === 'image' && settings.tagline_image.url ) { #>
+                                <div class="hero-tagline-icon">
+                                    <img src="{{{ settings.tagline_image.url }}}" alt="" class="hero-tagline-image">
+                                </div>
+                            <# } else if ( settings.tagline_icon_type === 'svg' && settings.tagline_icon ) { #>
+                                <div class="hero-tagline-icon">
+                                    {{{ settings.tagline_icon }}}
+                                </div>
+                            <# } #>
                             <span class="hero-tagline">{{{ settings.tagline_text }}}</span>
                         </div>
 
